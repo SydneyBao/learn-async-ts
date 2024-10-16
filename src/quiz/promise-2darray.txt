@@ -1,1 +1,7 @@
 Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+
+The sum2DArray function is called twice, immediately logging "Sum called..." and "returning from sum" twice and creating a Promise.
+This happens simultaniously. The empty Promise is rejected. Promise rejections create microtasks, which
+are processed before macrotasks. SetTimeout creates a macrotask, which is processed after microtasks.
+The setTimeout for the non-empty array executes, adds the numbers, and logs each addition.
+The sum for the non-empty array is resolved and logged.
